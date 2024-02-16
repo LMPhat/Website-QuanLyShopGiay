@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+    var nfi = new System.Globalization.NumberFormatInfo { NumberGroupSeparator = "." };
+    var loai = ViewBag.Loai as ShopGiay.Models.LOAISP;
+    var ListSize = new List<SelectListItem>();
+    for (int j = 35; j <= 46; j++)
+    {
+        var y = new SelectListItem
+        {
+            Text = j.ToString(),
+            Value = j.ToString()
+        };
+        ListSize.Add(y);
+    }
+}
+
+@using ShopGiay.Models;
+@model List<SANPHAM>
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>Product</title>
+    <link rel="stylesheet" href="/Content/nicepage.css" media="screen">
+    <link rel="stylesheet" href="/Content/Product.css" media="screen">
+    <script class="u-script" type="text/javascript" src="/js/Product.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="/js/nicepage.js" defer=""></script>
+
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+
+    <meta name="theme-color" content="#f38181">
+    <meta property="og:title" content="Product">
+    <meta property="og:type" content="website">
+</head>
+<body class="u-body u-overlap u-overlap-transparent u-xl-mode" data-lang="en">
+    <div class="container">
+        <div class="row product-group">
+            @foreach (var item in Model)
+            {
+                <div class="col-4" style="margin-bottom:20px;">
+                    <div class="card card-group">
+                        <a href="#"><img src="/ImagesSP/@item.HINHANH" class="card-img-top" alt="..."></a>
+                        <div class="card-body text-center">
+                            <div style="height:10vh;">
+                                <h4 class="u-align-center u-custom-font u-product-control u-text u-text-font u-text-1">
+                                    <a class="u-product-title-link" href="#"><!--product_title_content-->@item.TENSP<!--/product_title_content--></a>
+                                </h4><!--/product_title--><!--product_price-->
+                            </div>
+                            <div class="u-price u-text-palette-2-base" style="font-size: 1.25rem; font-weight: 700;"><!--product_regular_price_content-->@item.GIABAN.Value.ToString("#,##", nfi) VNĐ<!--/product_regular_price_content--></div><!--/product_regular_price-->
+                            <a href="/KhachHang/Details/@item.MASP" class="u-border-2 u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-product-control u-btn-2 btn-danger" style="margin:0 auto;"><!--product_button_content-->ADD CART<!--/product_button_content--></a><!--/product_button-->
+                        </div>
+                    </div>
+                </div>               
+            }
+        </div>
+    </div>
+</body>
+</html>

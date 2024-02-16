@@ -1,0 +1,234 @@
+﻿@model ShopGiay.Models.Confirm
+@{
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+    var chitiethoadon = ViewBag.Cart as List<ShopGiay.Models.Cart>;
+    var nfi = new System.Globalization.NumberFormatInfo { NumberGroupSeparator = "." };
+    var tongsp = 0;
+    double tongtien = 0;
+    if(chitiethoadon!=null)
+    {
+       tongsp= chitiethoadon.Sum(p => p.soluong);
+       tongtien = chitiethoadon.Sum(p => p.gia * p.soluong);
+    }
+        
+    
+    
+    var ListSize = new List<SelectListItem>();
+    for (int j = 35; j <= 46; j++)
+    {
+        
+        var y = new SelectListItem
+        {
+            
+            Text = j.ToString(),
+            Value = j.ToString()
+        };
+        ListSize.Add(y);
+    }
+    var listproduct = ViewBag.ListPro as List<ShopGiay.Models.SANPHAM>;
+    var bill=ViewBag.Bill as ShopGiay.Models.HOADON;
+    string MAVC = ViewBag.MaVC as string;
+    var Annouce = Session["annouce"];
+}
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="GIỎ HÀNG">
+    <meta name="description" content="">
+    <title>Page 5</title>
+    <link rel="stylesheet" href="~/Content/Cart.css" media="screen">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700|Bangers:400">
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Page 5">
+    <meta property="og:type" content="website">
+</head>
+<body class="u-body u-xl-mode" data-lang="en">
+    @if (Annouce != null )
+    {
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>@Annouce</strong>
+        </div>
+        Session["annouce"] = null;
+    }
+    <section class="u-align-center u-clearfix u-uploaded-video u-white u-section-1" id="sec-754a">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-border-3 u-border-grey-dark-1 u-line u-line-vertical u-line-1"></div>
+            <h2 class="u-custom-font u-font-oswald u-text u-text-custom-color-5 u-text-default u-text-1"> CART</h2>
+            <a href="/KhachHang/SanPham" class="u-active-none u-border-none u-btn u-button-style u-hover-none u-none u-text-hover-black u-btn-1">
+                <span class="u-file-icon u-icon"><img src="~/Image/545680.png" alt=""></span>&nbsp;Tiếp tục mua sắm
+            </a>
+            <div class="u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-radius-20 u-shape-round u-white u-group-1">
+                <div class="u-container-layout u-valign-top-md u-container-layout-1">
+                    <div class="u-absolute-hcenter-lg u-absolute-hcenter-xl u-border-3 u-border-grey-dark-1 u-line u-line-horizontal u-line-2"></div>
+                    <div class="u-absolute-hcenter-lg u-absolute-hcenter-xl u-border-3 u-border-grey-dark-1 u-line u-line-horizontal u-line-3"></div>
+                    <img class="u-image u-image-contain u-image-default u-image-1" src="~/Image/Logo1.jpg" alt="" data-image-width="1920" data-image-height="1920" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">
+                    <p class="u-custom-font u-font-oswald u-text u-text-default u-text-2">Số lư​ợng:</p>
+                    <p class="u-align-right u-custom-font u-font-oswald u-text u-text-3">@tongsp sản phẩm</p>
+                    <p class="u-align-right u-custom-font u-font-oswald u-text u-text-4">@tongtien.ToString("#,##",nfi) vnđ</p>
+                    <p class="u-custom-font u-font-oswald u-text u-text-default u-text-5">Tổn​g:</p>
+                    <div class="u-expanded-width-lg u-expanded-width-xl u-form u-form-1">
+
+                    @using (Html.BeginForm("Cart", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        if(bill!=null)
+                        {
+                        @Html.TextBoxFor(model=>model.MAHD,"",new
+                       {
+                            @Value=bill.SOHD,
+                            style = "display:none"
+                       })
+                        @Html.TextBoxFor(model => model.MAKH, "", new
+                       {
+                           @Value = bill.MAKH,
+                           style = "display:none"
+                       })
+                        @Html.TextBoxFor(model => model.NGAYGIAO, "", new
+                       {
+                           @Value = DateTime.Now,
+                           style = "display:none"
+                       })
+                        @Html.TextBoxFor(model => model.MAVC, "", new
+                       {
+                           @Value = MAVC,
+                           style = "display:none"
+                       })
+                    }
+                        <div class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+                            <div class="u-form-checkbox-group u-form-group u-form-input-layout-horizontal u-label-top">
+
+                                <label class="u-custom-font u-font-oswald u-label u-label-1">Phương thức thanh toán</label>
+                                <div class="u-form-checkbox-group-wrapper">
+                                    <div class="u-input-row">
+                                        @Html.RadioButtonFor(model => model.Payment, "Banking", new
+                                       {
+                                           id = "field-f16e",
+                                           name = "checkbox[]"
+                                       })
+                                        <label class="u-custom-font u-font-oswald u-label u-label-2" for="field-f16e">Banking</label>
+                                    </div>
+                                    <div class="u-input-row">
+                                        @Html.RadioButtonFor(model => model.Payment, "COD", new
+                                       {
+                                           id = "field-0c02",
+                                           name = "checkbox[]"
+                                       })
+                                        <label class="u-custom-font u-font-oswald u-label u-label-3" for="field-0c02">COD</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="u-align-center u-form-group u-form-submit u-label-top u-form-group-2">
+                                <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-palette-2-base u-radius-10 u-btn-2 ">
+                                    Thanh toán<br>
+                                </a>
+                                <input type="submit" value="submit" class="u-form-control-hidden">
+                            </div>
+                        </div>
+                    }
+                    </div>
+                </div>
+            </div>
+            @if (chitiethoadon != null)
+            {
+                <div class="u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-1">
+                    <div class="u-repeater u-repeater-1">
+                        @foreach (var item in chitiethoadon)
+                        {
+                            double tong = item.gia*item.soluong;
+                        <div class="u-container-style u-grey-5 u-hover-feature u-list-item u-radius-20 u-repeater-item u-shape-round u-list-item-1" data-animation-name="customAnimationIn" data-animation-duration="1000">
+                            <div class="u-container-layout u-similar-container u-container-layout-2">
+                                @using (Html.BeginForm("Delete", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.TextBox("SIZE", "", new
+                                    {
+                                        @Value = @item.size,
+                                        style = "display:none"
+                                    })
+                                    @Html.TextBox("MASP","", new
+                                    {
+                                        @Value = @item.MASP,
+                                        style = "display:none"
+                                    })
+                                    @Html.TextBox("MAHD", "", new
+                                    {
+                                        @Value = @item.MAHD,
+                                        style = "display:none"
+                                    })
+                                    <button type="submit"  class="u-btn u-btn-round u-button-style u-none u-text-hover-palette-3-base u-text-palette-4-base u-btn-3">
+                                        <span class="u-file-icon u-icon u-text-black u-icon-2"><img src="~/Image/1617543.png" alt=""></span>
+                                    </button>
+                                }
+                                @using (Html.BeginForm("Change", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data",style="width:90%" }))
+                                {
+                                    @Html.TextBox("OLDSIZE", "", new
+                                    {
+                                        @Value = @item.size,
+                                        style = "display:none"
+                                    })
+                                    @Html.TextBox("MASP", "", new
+                                    {
+                                        @Value = @item.MASP,
+                                        style = "display:none"
+                                    })
+                                    @Html.TextBox("MAHD", "", new
+                                    {
+                                        @Value = @item.MAHD,
+                                        style = "display:none"
+                                    })
+                                    <img class="u-image u-image-round u-preserve-proportions u-radius-11 u-image-2" src="/ImagesSP/@item.hinhanh" alt="" data-image-width="1280" data-image-height="560">
+                                    <p class="u-custom-font u-font-oswald u-text u-text-6">@item.tenSP</p>
+                                    var slsp=listproduct.Where(P=>P.MASP==item.MASP).FirstOrDefault();
+                                    <p class="u-custom-font u-font-oswald u-text u-text-7">Số lượng: 
+                                     <span> @Html.TextBox("SOLUONG","", new
+                                        {
+                                            @type = "number",
+                                            @step = "1",
+                                            @min = "1",
+                                            @max = slsp.SOLUONG,
+                                            placeholder = "Nhập số lượng",
+                                            id = "text-769a",
+                                            name = "text-4",
+                                            style="width:70px",
+                                            @Value = item.soluong,
+                                            onchange = "this.form.submit()",
+                                        })&nbsp;</span></p>
+                                    foreach(var size in ListSize)
+                                    {
+                                        if(Int16.Parse(size.Value)==item.size)
+                                        {
+                                            size.Selected = true;
+                                        }
+                                        else
+                                        {
+                                            size.Selected = false;
+                                        }
+                                           
+                                    }
+                                    <p class="u-custom-font u-font-oswald u-text u-text-8">Size: 
+                                    <span> @Html.DropDownList("NEWSIZE", ListSize, new
+                                    {
+                                        style = "width:150px",
+                                        id = "select-c3e3",
+                                        name = "select",
+                                        onchange = "this.form.submit()",
+                                    })</span>&nbsp;</p>
+                                    <p class="u-custom-font u-font-oswald u-text u-text-9">Giá: @item.gia.ToString("#,##",nfi) vnđ&nbsp;</p>
+                                    <p class="u-custom-font u-font-oswald u-text u-text-10" data-animation-name="" data-animation-duration="0" data-animation-direction="">Giá tổng: @tong.ToString("#,##", nfi) vnđ</p>
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+    </section>
+</body>
+</html>

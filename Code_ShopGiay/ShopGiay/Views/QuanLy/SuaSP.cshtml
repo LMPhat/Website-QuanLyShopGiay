@@ -1,0 +1,47 @@
+﻿@model ShopGiay.Models.SANPHAM
+
+@{
+    ViewBag.Title = "SuaSP";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1">UPDATE</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <br /><br /><br />
+            <fieldset>
+                @Html.HiddenFor(model => model.MASP)
+                <div class="editor-label">
+                    NAME
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TENSP)
+                    @Html.ValidationMessageFor(model => model.TENSP)
+                </div>
+                <br />
+                @*<div class="editor-label">
+                    PRICE
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.GIABAN)
+                    @Html.ValidationMessageFor(model => model.GIABAN)
+                </div>*@
+                @*<br />*@
+                @*<div class="editor-label">
+                    STATUS
+                </div>*@
+                @*<div class="editor-field">
+                    @Html.EditorFor(model => model.TINHTRANG)
+                    @Html.ValidationMessageFor(model => model.TINHTRANG)
+                </div>*@
+                <p>
+                    <button class="btn btn-dark" type="submit" value="Update" style="margin-top:20px;">UPDATE</button>
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>

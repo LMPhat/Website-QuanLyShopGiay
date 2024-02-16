@@ -1,0 +1,89 @@
+﻿@model ShopGiay.Models.SANPHAM
+@using ShopGiay.Models;
+@{
+    ViewBag.Title = "ThemSanPham";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+
+    List<KICHTHUOC> n = ViewBag.makt;
+}
+
+<link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <form method="post" action="/QuanLy/ThemSanPham" enctype="multipart/form-data">
+            <fieldset>
+                <h2 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1">ADD PRODUCT</h2>
+                <br />
+                <div class="editor-label">
+                    CATELORY
+                </div>
+                <div class="editor-field" style="height:40px">
+                    @Html.DropDownList("MALOAI")
+                </div>
+
+                @*<div class="editor-label">
+                    STORAGE
+                </div>*@
+                @*<div class="editor-field" style="height:40px">
+                    @Html.DropDownList("MAKHO")
+                </div>*@
+                @*<div class="editor-label">
+                        ID PRODUCT
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.MASP)
+                        @Html.ValidationMessageFor(model => model.MASP)
+                    </div>*@
+                <div class="editor-label">
+                    NAME
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TENSP)
+                    @Html.ValidationMessageFor(model => model.TENSP)
+                </div>
+                <br />
+                <div class="editor-label">
+                    IMAGE
+                </div>
+                <div class="editor-field">
+                    <input class="form-control form-control-sm" name="fileUpload" type="file" placeholder="Choose file" style="width:90%;">
+                </div>
+                @*<br />
+                <div class="editor-label">
+                    SIZE
+                </div>
+                <div class="editor-field">
+                    <select name="MaKT">
+                        @foreach (var i in n)
+                        {
+                            <option value="@i.MAKICHTHUOC">@i.KICHTHUOC1</option>
+                        }
+                    </select>
+                </div>*@
+                @*<br />
+                <div class="editor-label">
+                    STATUS
+                </div>*@
+                <br />
+                <div class="editor-label">
+                    PRICE
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.GIABAN)
+                    @Html.ValidationMessageFor(model => model.GIABAN)
+                </div>
+                @*<br />
+                <div class="editor-label">
+                    AMOUNT
+                </div>
+                <div class="editor-field">
+                    <input aria-label="quantity" class="input-qty" max="1000" min="0" name="SoLuong" type="number" value="0">
+                </div>*@
+
+                <p>
+                    <button class="btn btn-dark" type="submit" value="Create" style="margin-top:20px;">CREATE</button>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+</div>

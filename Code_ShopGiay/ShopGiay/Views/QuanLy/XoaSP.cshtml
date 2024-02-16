@@ -1,0 +1,64 @@
+﻿@model ShopGiay.Models.SANPHAM
+
+@{
+    ViewBag.Title = "XoaSP";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <fieldset>
+            <h2 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1">DELETE PRODUCT</h2>
+            <div class="display-label">
+                ID: @Html.DisplayFor(model => model.MASP)
+            </div>
+            <br />
+            <div class="display-label">
+                NAME: @Html.DisplayFor(model => model.TENSP)
+            </div>
+            <div class="display-label" style="padding-top:20px;">
+                IMAGE:
+            </div>
+            <div class="display-field" style="margin-left:30px;">
+                <img src="/ImagesSP/@Model.HINHANH" width="300" />
+            </div>
+            @*<div class="display-label" style="padding-top:20px;">
+                SIZE: @Html.DisplayFor(model => model.SIZE)
+            </div>
+            <div class="display-field">
+            </div>
+            <div class="display-label" style="padding-top:20px;">
+                STATUS: @Html.DisplayFor(model => model.TINHTRANG)
+            </div>*@
+            <div class="display-field">
+            </div>
+            <div class="display-label" style="padding-top:20px;">
+                PRICE: @Html.DisplayFor(model => model.GIABAN)
+            </div>
+            <div class="display-field">
+            </div>
+            @*<div class="display-label" style="padding-top:20px;">
+                AMOUNT: @Html.DisplayFor(model => model.SOLUONG)
+            </div>*@
+            <div class="display-label" style="padding-top:20px;">
+                CATELORY: @Html.DisplayFor(model => model.MALOAI)
+            </div>
+            <div class="display-field">
+            </div>
+            @*<div class="display-label" style="padding-top:20px;">
+                STORAGE: @Html.DisplayFor(model => model.MAKHO)
+            </div>*@
+            <div class="display-field">
+            </div>
+            <br /><br />
+            <h4 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1">Are you sure you want to delete?</h4>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <button class="btn btn-danger" type="submit" value="Delete" style="margin-top:20px;">DELETE</button>
+                </p>
+            }
+        </fieldset>
+    </div>
+</div>

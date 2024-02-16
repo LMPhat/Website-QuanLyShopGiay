@@ -1,0 +1,69 @@
+﻿@model ShopGiay.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "ThemNV";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+<link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <form method="post" action="/QuanLy/ThemNV" enctype="multipart/form-data">
+            <fieldset>
+                <h2 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1">ADD EMPLOYEE</h2>
+                <br />
+                <div class="editor-label">
+                    NAME
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.HOTEN)
+                    @Html.ValidationMessageFor(model => model.HOTEN)
+                </div>
+
+                <div class="editor-label">
+                    DATE OF BIRTH
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.NGAYS)
+                    @Html.ValidationMessageFor(model => model.NGAYS)
+                </div>
+
+                <div class="editor-label">
+                    ADDRESS
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DIACHI)
+                    @Html.ValidationMessageFor(model => model.DIACHI)
+                </div>
+
+                <div class="editor-label">
+                    USERNAME
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TAIKHOAN)
+                    @Html.ValidationMessageFor(model => model.TAIKHOAN)
+                </div>
+
+                <div class="editor-label">
+                    PASSWORD
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MATKHAU)
+                    @Html.ValidationMessageFor(model => model.MATKHAU)
+                </div>
+
+                <div class="editor-label">
+                    STATUS
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TRANGTHAI)
+                    @Html.ValidationMessageFor(model => model.TRANGTHAI)
+                </div>
+
+                <p>
+                    <input type="submit" value="Create" />
+                </p>
+            </fieldset>
+        </form>
+    </div>
+</div>

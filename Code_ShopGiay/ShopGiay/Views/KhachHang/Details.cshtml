@@ -1,0 +1,99 @@
+﻿@model ShopGiay.Models.AddCart
+@{
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+    var nfi = new System.Globalization.NumberFormatInfo { NumberGroupSeparator = "." };
+    var loai = ViewBag.Loai as ShopGiay.Models.LOAISP;
+    var ListSize = new List<SelectListItem>();
+    for (int j = 35; j <= 46; j++)
+    {
+        var y = new SelectListItem
+        {
+            Text = j.ToString(),
+            Value = j.ToString()
+        };
+        ListSize.Add(y);
+    }
+    var sp = ViewBag.SanPham as ShopGiay.Models.SANPHAM;
+    var KH=Session["kh"] as ShopGiay.Models.KHACHHANG;
+    
+}
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Vui lòng chọn ảnh đại diện">
+    <meta name="description" content="">
+    <title></title>
+    <link rel="stylesheet" href="~/Content/Details.css" media="screen">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700|Bangers:400">
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Page 3">
+    <meta property="og:type" content="website">
+</head>
+<body class="u-body u-xl-mode" data-lang="en">
+    <section class="u-clearfix u-section-1" id="sec-48c0">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <img class="u-image u-image-round u-radius-37 u-image-1" src="/ImagesSP/@sp.HINHANH" alt="" data-image-width="1280" data-image-height="841">
+            <h5 class="u-custom-font u-font-oswald u-text u-text-1">@sp.TENSP</h5>
+            <h6 class="u-custom-font u-font-oswald u-text u-text-2">ID: @sp.MASP</h6>
+            <h6 class="u-custom-font u-font-oswald u-text u-text-3">CATELOGY: @loai.TENLOAI </h6>
+            <h6 class="u-custom-font u-font-oswald u-text u-text-4">STATUS: @sp.TINHTRANG</h6>
+            <h6 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-5">Price ​:​ @sp.GIABAN.Value.ToString("#,##",nfi) VNĐ</h6>
+            <div class="u-form u-form-1">
+                @using (Html.BeginForm("Details", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.TextBoxFor(model => model.MaSP, new
+                    {
+                        @Value=@sp.MASP,
+                        style="display:none"
+                    })
+                    if(KH!=null)
+                    {
+                        @Html.TextBoxFor(model => model.MaKH, new
+                        {
+                            @Value = @KH.MAKH,
+                            style="display:none"
+                        })
+                    }
+                <div class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="email" name="form">
+                    <div class="u-form-group u-form-partition-factor-2 u-form-select u-label-none u-form-group-1">
+                        <div class="u-form-select-wrapper">
+                            @Html.DropDownListFor(model => model.Size, ListSize, new
+                            {
+                                @class = "u-border-1 u-border-grey-30 u-input u-input-rectangle u-white",
+                                id = "select-c3e3",
+                                name = "select"
+                            })
+                            <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                        </div>
+                    </div>
+                    <div class="u-form-group u-form-partition-factor-2 u-label-none u-form-group-2">
+                        @Html.TextBoxFor(model => model.SoLuong, new
+                                {
+                                    @class = "u-border-1 u-border-grey-30 u-input u-input-rectangle u-white",
+                                    @type = "number",
+                                    @step = "1",
+                                    @min = "1",
+                                    @max = sp.SOLUONG,
+                                    placeholder = "Nhập số lượng",
+                                    id = "text-769a",
+                                    name = "text-4"
+                                })
+                        
+                    </div>
+                    <div class="u-align-left u-form-group u-form-submit">
+                        <a href="#" class="u-btn u-btn-submit u-button-style">BUY NOW</a>
+                        <input type="submit" value="submit" class="u-form-control-hidden">
+                    </div>
+                    @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

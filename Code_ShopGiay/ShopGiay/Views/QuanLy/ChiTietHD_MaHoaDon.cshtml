@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ShopGiay.Models.CHITIETHOADON>
+<link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+@{
+    var tongsl = Model.Sum(i => i.SOLUONG);
+    var tongtt = Model.Sum(i => i.SOLUONG * i.SANPHAM.GIABAN);
+
+    var nfi = new System.Globalization.NumberFormatInfo { NumberGroupSeparator = "." };
+    var ListSize = new List<SelectListItem>();
+    for (int j = 35; j <= 46; j++)
+    {
+        var y = new SelectListItem
+        {
+            Text = j.ToString(),
+            Value = j.ToString()
+        };
+        ListSize.Add(y);
+    }
+}
+
+<div class="nav navbar">
+    <div class="dropdown">
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle text-dark" id="a" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                <span>@tongsl</span>
+            </a>
+            <div style="position:relative;" class="dropdown-menu collapse list-unstyled" aria-labelledby="a">
+                <table class="table table-hover">
+                    <tr>
+                        <th>
+                            ID Product
+                        </th>
+                        <th>
+                            Name Product
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.MASP
+                            </td>
+                            <td>
+                                @item.SANPHAM.TENSP
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SOLUONG)
+                            </td>
+                            <td>
+                                @item.SANPHAM.GIABAN.Value.ToString("#,##", nfi) VNĐ
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

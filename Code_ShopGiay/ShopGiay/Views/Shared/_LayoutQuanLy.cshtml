@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="" media="screen">
+    <link rel="stylesheet" href="~/Content/nicepage.css" media="screen">
+    <script class="u-script" type="text/javascript" src="~/Scripts/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="~/Scripts/nicepage.js" defer=""></script>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Page 1">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4 pt-5">
+                @Html.Action("KhoiTao_AD", "TaiKhoan")
+                <h1><a href="/QuanLy/SanPham" class="logo">Sneaker</a></h1>
+                <ul class="list-unstyled components mb-5 u-custom-font u-font-oswald u-nav u-unstyled u-nav-1">
+                    <li>
+                        <a href="/QuanLy/TheLoai">CATEGORY LIST</a>
+                    </li>
+                    <li>
+                        <a href="/QuanLy/SanPham">PRODUCT LIST</a>
+                    </li>
+                    <li>
+                        <a href="/QuanLy/NhaCungCap">SUPPLIER LIST</a>
+                    </li>
+                    @*<li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">CATEGORY LIST &nbsp;&nbsp;</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            @Html.Action("MenuLoaiSP", "QuanLy")
+                        </ul>
+                    </li>*@
+                    <li>
+                        <a href="/QuanLy/PhieuNhap">RECEIPT</a>
+                    </li>
+                    <li>
+                        <a href="/QuanLy/NhanVien">EMPLOYEE</a>
+                    </li>
+                    <li>
+                        <a href="/QuanLy/KhachHang">CUSTOMER</a>
+                    </li>
+                    <li>
+                        <a href="/QuanLy/HoaDon">ODER</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            <div class="container body-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/bootstrap/jquery-3.3.1.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.js"></script>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    @*<script src="~/js/bootstrap.min.js"></script>*@
+    <script src="~/js/main.js"></script>
+</body>
+</html>

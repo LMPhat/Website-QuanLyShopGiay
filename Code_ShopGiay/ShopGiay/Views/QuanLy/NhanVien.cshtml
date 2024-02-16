@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "NhanVien";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+@using ShopGiay.Models;
+@model List<NHANVIEN>
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="PRODUCT LIST">
+    <meta name="description" content="">
+    <title>Home</title>
+    <link rel="stylesheet" href="/Content/nicepage.css" media="screen">
+    <link rel="stylesheet" href="/Content/Home.css" media="screen">
+    <script class="u-script" type="text/javascript" src="/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="/js/nicepage.js" defer=""></script>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
+
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Home">
+    <meta property="og:type" content="website">
+</head>
+<body class="u-body u-xl-mode" data-lang="en">
+    <section class="u-align-center u-clearfix u-section-2" id="sec-fc05">
+        <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
+            <div class="u-align-center-xs u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xl u-container-style u-expanded-width u-group u-shape-rectangle u-group-1">
+                <div class="u-container-layout u-container-layout-1">
+                    <h2 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1"> EMPLOYEE LIST&nbsp;</h2>
+                    <a href="/QuanLy/ThemNV" class="u-border-2 u-border-black u-border-hover-custom-color-1 u-btn u-button-style u-hover-custom-color-1 u-none u-text-hover-white u-btn-1">CREATE NEW</a>
+                    <div class="u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-shape-rectangle u-group-2">
+                        <div class="u-container-layout u-container-layout-2">
+                            <form action="/QuanLy/XLTimKiem_NV" method="post" class="u-border-1 u-border-grey-30 u-search u-search-left u-white u-search-1">
+                                <button class="u-search-button" type="submit">
+                                    <span class="u-file-icon u-search-icon u-spacing-10 u-search-icon-1">
+                                        <img src="/Image/8765985.png" alt="">
+                                    </span>
+                                </button>
+                                <input class="u-custom-font u-font-oswald u-search-input" type="search" name="search" value="" placeholder="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="u-expanded-width u-table u-table-responsive u-table-1">
+                <table class="u-table-entity">
+                    <colgroup>
+                        <col width="4.1%">
+                        <col width="17.6%">
+                        <col width="11.6%">              
+                        <col width="18.2%">
+                        <col width="14.3%">
+                        <col width="12.4%">
+                        <col width="7.8%">
+                        <col width="14%">
+                    </colgroup>
+                    <thead class="u-align-center u-black u-table-header u-table-header-1">
+                        <tr style="height: 85px;">
+                            <th class="u-align-center u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell">ID</th>
+                            <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-2">Name</th>
+                            <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-3">DATE OF BIRTH</th>                         
+                            <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-5">ADDRESS</th>
+                            <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-6">USERNAME</th>
+                            <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-7">PASSWORD</th>
+                            <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-4">GENDER</th>
+                            <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-8">OPTION</th>
+                        </tr>
+                    </thead>
+                    @foreach(var item in Model)
+                    {
+                        <tbody class="u-align-center u-custom-font u-font-oswald u-table-body">
+                            <tr style="height: 100px;">
+                                <td class="u-align-left u-border-1 u-border-grey-30 u-first-column u-table-cell u-table-cell-9">@item.MANV</td>
+                                <td class="u-align-left u-border-1 u-border-grey-30 u-table-cell u-table-cell-10">@item.HOTEN</td>
+                                <td class="u-align-center u-border-1 u-border-grey-30 u-table-cell u-table-cell-11">@item.NGAYS</td>
+                                <td class="u-align-left u-border-1 u-border-grey-30 u-table-cell u-table-cell-13">@item.DIACHI</td>
+                                <td class="u-align-left u-border-1 u-border-grey-30 u-table-cell u-table-cell-14">@item.TAIKHOAN</td>
+                                <td class="u-align-left u-border-1 u-border-grey-30 u-table-cell u-table-cell-15">@item.MATKHAU</td>
+                                <td class="u-align-center u-border-1 u-border-grey-30 u-table-cell u-table-cell-12">@item.TRANGTHAI</td>
+                                <td class="u-border-1 u-border-grey-30 u-table-cell u-table-cell-16">
+                                    <div><a href="/QuanLy/SuaNV/@item.MANV" class="btn btn-secondary" style="margin-bottom:10px;">UPDATE</a></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

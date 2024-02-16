@@ -1,0 +1,89 @@
+﻿@model ShopGiay.Models.SANPHAM
+
+@{
+    ViewBag.Title = "ThemSP";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+<h2>ThemSP</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SANPHAM</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MALOAI)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MALOAI)
+            @Html.ValidationMessageFor(model => model.MALOAI)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MAKHO)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MAKHO)
+            @Html.ValidationMessageFor(model => model.MAKHO)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TENSP)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TENSP)
+            @Html.ValidationMessageFor(model => model.TENSP)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HINHANH)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HINHANH)
+            @Html.ValidationMessageFor(model => model.HINHANH)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SIZE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SIZE)
+            @Html.ValidationMessageFor(model => model.SIZE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TINHTRANG)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TINHTRANG)
+            @Html.ValidationMessageFor(model => model.TINHTRANG)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GIABAN)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GIABAN)
+            @Html.ValidationMessageFor(model => model.GIABAN)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SOLUONG)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SOLUONG)
+            @Html.ValidationMessageFor(model => model.SOLUONG)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

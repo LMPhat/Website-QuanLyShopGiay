@@ -1,0 +1,10 @@
+﻿@using ShopGiay.Models;
+@model List<LOAISP>
+
+
+@foreach (var item in Model)
+{
+    <li>
+        <a href="/QuanLy/HTSP_TheoLoai/@item.MALOAI">@item.TENLOAI</a>
+    </li>
+}

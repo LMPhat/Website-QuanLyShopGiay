@@ -1,0 +1,51 @@
+﻿@model ShopGiay.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "SuaNV";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="u-text u-text-default u-text-palette-1-base u-text-1">UPDATE</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <br /><br /><br />
+            <fieldset>
+
+                @Html.HiddenFor(model => model.MANV)
+
+                <div class="editor-label">
+                    Name
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.HOTEN)
+                    @Html.ValidationMessageFor(model => model.HOTEN)
+                </div>
+                <br />
+                <div class="editor-label">
+                    ADDRESS
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DIACHI)
+                    @Html.ValidationMessageFor(model => model.DIACHI)
+                </div>
+                <br />
+                <div class="editor-label">
+                    STATUS
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TRANGTHAI)
+                    @Html.ValidationMessageFor(model => model.TRANGTHAI)
+                </div>
+
+                <p>
+                    <button class="btn btn-danger" type="submit" value="Update" style="margin-top:20px;">UPDATE</button>
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>

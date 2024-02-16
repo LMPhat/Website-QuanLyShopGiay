@@ -1,0 +1,242 @@
+﻿@model ShopGiay.Models.CHITIETPN
+@using ShopGiay.Models;
+
+@{
+    ViewBag.Title = "ThemPhieuNhap";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+
+    var nfi = new System.Globalization.NumberFormatInfo { NumberGroupSeparator = "." };
+    
+    List<SANPHAM> dssp = ViewBag.masp;
+    List<KICHTHUOC> dskt = ViewBag.makt;
+    List<NHACUNGCAP> dsncc = ViewBag.mancc;
+}
+
+<link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+            <fieldset>
+                <h2 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1">ADD RECEIPT</h2>
+                <div class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1 text-md-left" style="font-size: 20px;">
+                    Supplier
+                </div>
+                <div class="editor-field" style="width:100px; height:40px">
+                    <select id="MANCC" name="MANCC">
+                        @foreach (var ncc in dsncc)
+                        {
+                            <option value="@ncc.MANCC">@ncc.TENNCC</option>
+                        }
+                    </select>
+                </div>        
+                
+                <h4 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1">List Product</h4>
+                <div style="width: 1000px; height: 500px; overflow: auto; border: 1px solid gray;">
+                    <table class="u-table-entity">
+                        <colgroup>
+                            <col width="3.2%">
+                            <col width="12.8%">
+                            <col width="6.5%">
+                            <col width="10%">
+                            <col width="11.8%">
+                        </colgroup>
+                        <thead class="u-align-center u-black u-table-header u-table-header-1">
+                            <tr style="height: 85px;">
+                                <th class="u-align-center u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell">ID</th>
+                                <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-2">NAME</th>
+                                <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-3">CATELOGY</th>
+                                <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-7">AMOUNT</th>
+                                <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-10">OPTION</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in dssp)
+                        {
+                            <tbody class="u-align-center u-custom-font u-font-oswald u-table-body">
+                                <tr style="height: 100px;">
+                                    <td class="u-align-left u-border-1 u-border-grey-30 u-first-column u-table-cell u-table-cell-9">@item.MASP</td>
+                                    <td class="u-align-left u-border-1 u-border-grey-30 u-table-cell u-table-cell-12">@item.TENSP</td>
+                                    <td class="u-align-left u-border-1 u-border-grey-30 u-table-cell u-table-cell-14">@item.LOAISP.TENLOAI</td>
+                                    <td class="u-border-1 u-border-grey-30 u-table-cell u-table-cell-17 u-table-cell-9">
+                                        @Html.Action("ChiTietKT_MaSP", "QuanLy", new { id = item.MASP })
+                                    </td>
+                                    <td class="u-border-1 u-border-grey-30 u-table-cell u-table-cell-20">
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addProductModal-@item.MASP" data-masp="@item.MASP">
+                                            ADD
+                                        </button>
+
+                                        <!-- Modal cho sản phẩm cụ thể -->
+                                        <form method="post" action="/QuanLy/AddProduct" enctype="multipart/form-data">
+                                            <div class="modal fade" id="addProductModal-@item.MASP" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true" data-masp="@item.MASP">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="addProductModalLabel">Add Product Information</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body text-xl-left" style="color:gray;">
+                                                            <!-- Hiển thị thông tin sản phẩm -->
+                                                            <p>Product ID: <span style="color:black;"> @item.MASP </span></p>
+                                                            <p>Product Name: <span style="color:black;"> @item.TENSP </span></p>
+                                                            <p>Product Category: <span style="color:black;"> @item.LOAISP.TENLOAI </span></p>
+                                                            <input type="hidden" name="MASP" value="@item.MASP">
+                                                            <div class="editor-label">
+                                                                SIZE
+                                                            </div>
+                                                            <div class="editor-field" style="height: 40px">
+                                                                <select id="MAKICHTHUOC" name="MAKICHTHUOC">
+                                                                    @foreach (var kt in dskt)
+                                                                    {
+                                                                        <option value="@kt.MAKICHTHUOC">@kt.KICHTHUOC1</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                            <div class="editor-label">
+                                                                AMOUNT
+                                                            </div>
+                                                            <div class="editor-field">
+                                                                <input type="text" name="SLNHAP" />
+                                                                @Html.ValidationMessageFor(model => model.SLNHAP)
+                                                            </div>
+                                                            <div class="editor-label">
+                                                                PRICE
+                                                            </div>
+                                                            <div class="editor-field">
+                                                                <input type="text" name="DGNHAP" />
+                                                                @Html.ValidationMessageFor(model => model.DGNHAP)
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-danger">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+                @*<hr style="background-color:darkgrey;">*@
+                <br />
+                <h4 class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1">Details Receipt</h4>
+                <div style="width: 1000px; height: 500px; overflow: auto;">
+                    <table class="u-table-entity">
+                        <colgroup>
+                            <col width="3.2%">
+                            <col width="12.8%">
+                            <col width="6.5%">
+                            <col width="10%">
+                            <col width="11.8%">
+                        </colgroup>
+                        <thead class="u-align-center u-black u-table-header u-table-header-1">
+                            <tr style="height: 85px;">
+                                <th class="u-align-center u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell">ID</th>
+                                <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-2">NAME</th>
+                                <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-3">CATELOGY</th>
+                                <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-7">AMOUNT</th>
+                                <th class="u-border-1 u-border-grey-30 u-custom-font u-font-oswald u-table-cell u-table-cell-10">OPTION</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in (List<CTPN>)Session["SelectedProducts"])
+                        {
+                            <tbody class="u-align-center u-custom-font u-font-oswald u-table-body">
+                                <tr style="height: 100px;">
+                                    <td class="u-align-left u-border-1 u-border-grey-30 u-first-column u-table-cell u-table-cell-9">@item.MASP</td>
+                                    <td class="u-align-left u-border-1 u-border-grey-30 u-table-cell u-table-cell-12">@item.tenSP</td>
+                                    <td class="u-align-left u-border-1 u-border-grey-30 u-table-cell u-table-cell-14">@item.tenLoai</td>
+                                    <td class="u-align-right u-border-1 u-border-grey-30 u-table-cell u-table-cell-16 ">
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <th>
+                                                    SIZE
+                                                </th>
+
+                                                <th>
+                                                    AMOUNT
+                                                </th>
+                                                <th>
+                                                    PRICE
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    @item.size
+                                                </th>
+
+                                                <th>
+                                                    @item.soluong
+                                                </th>
+                                                <th>
+                                                    @item.giaNhap.ToString("#,##", nfi) VNĐ
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="u-border-1 u-border-grey-30 u-table-cell u-table-cell-20">
+                                        <div><a href="/QuanLy/DeleteProduct/@item.MASP?kt=@item.size" class="btn btn-danger">DELETE</a></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+                @{List<CTPN> pn = Session["SelectedProducts"] as List<CTPN>;}
+                <div class="u-expanded-width-xs u-table u-table-responsive u-table-2">
+                    <span style="height:40px">
+                        <table class="u-table-entity">
+                            <colgroup>
+                                <col width="6%">
+                                <col width="20%">
+                            </colgroup>
+                            <tbody class="u-table-body">
+                                <tr>
+                                    <td class="u-custom-font u-font-oswald u-text u-text-custom-color-1 u-text-1 font-weight-bold text-md-center" style="font-size: 20px;">TOTAL: </td>
+                                    <td class="u-custom-font u-font-oswald border" width="10px">
+                                        @{
+                                            if (pn == null)
+                                            {
+                                                <span>0</span>
+                                            }
+                                            else
+                                            {
+                                                <span>@pn.Sum(t => t.soluong * t.giaNhap).ToString("#,##", nfi) VNĐ</span>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <div><a href="javascript:void(0);" onclick="createPhieuNhap()" class="btn btn-dark f" style="font-size: 20px;">CREATE</a></div>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </span>
+                </div>
+            </fieldset>
+    </div>
+</div>
+
+<script>
+    function validateNumber(input) {
+        // Loại bỏ ký tự không phải số (ký tự đặc biệt, chữ cái, v.v.)
+        input.value = input.value.replace(/[^0-9.+\-]/g, "");
+    }
+
+    function saveData(id) {
+        var masp = id;
+        var makichthuoc = document.getElementById("MAKICHTHUOC").value;
+        var amount = document.getElementById("amount").value;
+        var url = "/QuanLy/AddProduct/" + masp + "?MAKICHTHUOC=" + makichthuoc + "&amount=" + amount;
+        window.location.href = url;
+    }
+
+    function createPhieuNhap() {
+        var selectedValue = document.getElementById("MANCC").value;
+        window.location.href = "/QuanLy/ThemPhieuNhap_CT?mancc=" + selectedValue;
+    }
+</script>
